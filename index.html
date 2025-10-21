@@ -1,47 +1,301 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charity Water Landing Page</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charity Water - Every Drop Counts</title>
+  <style>
+    /* 
+      All styles for this page are included here in one place 
+      to make it easy for beginners to see and understand the CSS.
+    */
+    /* ----------------------------- */
+    /* GLOBAL STYLES */
+    /* ----------------------------- */
+    body {
+      margin: 0;
+      /* Use a web-safe font stack for better compatibility */
+      font-family: Arial, Helvetica, sans-serif;
+      /* 
+         For more stylish fonts, you can use Google Fonts.
+         Example: 
+         Add this in the <head> section:
+         <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+         And then use:
+         font-family: 'Roboto', Arial, Helvetica, sans-serif;
+      */
+      color: #1a1a1a; /* Updated to new dark color */
+      background-color: #fff;
+      line-height: 1.6;
+    }
+
+    /* Make all headings use the dark site color for consistency */
+    h1, h2, h3 {
+      color: #1a1a1a;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .hero {
+      /* Removed the background image so the logo file can be shown as an <img> */
+      /* background: url('cw_logo.png') center/cover no-repeat; */
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #1a1a1a; /* Updated text color */
+      background-color: #FFF7E1; /* New light yellow background */
+    }
+
+    /* New class: simple, beginner-friendly styling for the front logo.
+       It keeps the logo small enough to fit on the hero and adds spacing. */
+    .front-logo {
+      width: 140px; /* controls how large the logo appears */
+      height: auto; /* keep aspect ratio */
+      margin-bottom: 1rem; /* space between logo and heading */
+      /* no positioning needed — the hero uses flexbox to center children */
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      max-width: 800px;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      max-width: 600px;
+    }
+
+    .hero .donate-btn {
+      margin-top: 1.5rem;
+      background-color: #FFC907; /* Updated yellow */
+      color: #1a1a1a;
+      padding: 0.75rem 1.5rem;
+      border-radius: 40px;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .hero .donate-btn:hover {
+      background-color: #FF902A;
+      color: #fff;
+    }
+
+    /* ----------------------------- */
+    /* STORY SECTION */
+    /* ----------------------------- */
+    .story {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      padding: 3rem 1.5rem;
+      background-color: #f7f9fb;
+    }
+
+    .story-img {
+      /* keep the image responsive but avoid rendering it too small */
+      flex: 1 1 400px;
+      display: block;       /* ensure it behaves like a block for sizing */
+      max-width: 600px;     /* allow a bit larger image on wide screens */
+      width: 100%;
+      height: auto;         /* preserve aspect ratio */
+      border-radius: 10px;
+    }
+
+    .story-text {
+      flex: 1 1 400px;
+      padding: 1.5rem;
+    }
+
+    /* Ensure story heading matches the site's dark text color */
+    .story-text h2 {
+      color: #1a1a1a;
+    }
+
+    /* caption under story images (now scoped to story-text) */
+    .story-text .caption {
+      font-size: 0.95rem;
+      color: #1a1a1a;
+      margin-top: 0.5rem;
+    }
+
+    /* ----------------------------- */
+    /* CALL TO ACTION SECTION */
+    /* ----------------------------- */
+    /* Use brand yellow for the CTA background and dark text for readability */
+    .cta {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      background-color: #FFC907; /* replaced blue with warm yellow */
+      color: #1a1a1a; /* all text uses the dark color */
+    }
+
+    .cta h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .cta p {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Keep CTA button matching the brand yellow and dark text */
+    .cta .donate-btn {
+      background-color: #FFF7E1; /* lighter yellow variation for button background */
+      color: #1a1a1a;
+      padding: 0.75rem 1.5rem;
+      border-radius: 40px;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .cta .donate-btn:hover {
+      background-color: #FF902A; /* subtle hover color, keep readable */
+      color: #fff;
+    }
+
+    /* ----------------------------- */
+    /* FOOTER */
+    /* ----------------------------- */
+    /* Use a light yellow footer so dark text remains readable and consistent */
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #FFF7E1; /* replaced green with light yellow */
+      color: #1a1a1a;
+    }
+    /* RESPONSIVE DESIGN */
+    /* ----------------------------- */
+    @media (max-width: 768px) {
+      /* This ensures the layout adapts to smaller screens */
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .story {
+        flex-direction: column;
+      }
+
+      .story img {
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    /* ----------------------------- */
+    /* LOGO IMAGE POSITIONING */
+    /* ----------------------------- */
+    .logo-img {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 80px; /* Set a reasonable width for the logo */
+      height: auto;
+    }
+  </style>
 </head>
+<!-- 
+  The body of this page is divided into several main sectionmas:
+  1. HERO SECTION: The main banner with a headline and donate button.
+  2. STORY SECTION: Shares a story and image about the impact of clean water.
+  3. CALL TO ACTION SECTION: Encourages visitors to donate.
+  4. FOOTER: Contains copyright and the logo.
+-->
 <body>
-    <!-- Hero Section: This is the main banner at the top of the page -->
-    <section class="hero">
-        <!-- Main headline -->
-        <h1>Clean Water for Everyone</h1>
-        <!-- Subheadline -->
-        <p>Join us in bringing safe, clean water to communities in need.</p>
-    </section>
 
-    <!-- Story Section: This tells the story of the nonprofit -->
-    <section class="story">
-        <h2>Our Story</h2>
-        <p>
-         
-    </section>
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <!-- Add id so the script can check multiple locations if the file isn't found -->
+    <img id="front-logo" src="cw_logo.png" alt="Charity Water Logo" class="front-logo">
 
-    <!-- Real-World Impact Story Section -->
-    <section class="impact-story">
-        <!-- Section headline -->
-        <h2>Real Impact: Meet Amina</h2>
-        <!-- Container for image and text -->
-        <div class="impact-content">
-            <!-- Impact image -->
-            <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80" alt="Amina smiling with clean water" class="impact-image">
-            <!-- Impact story text -->
-            <p>
-                Amina used to walk miles every day to collect water for her family. Thanks to your support, her village now has a clean water well. Amina can go to school and her family is healthier and happier.
-            </p>
-        </div>
-    </section>
+    <h1>Turn Your Values Into Clean Water</h1>
+    <p>Fund community-led, 100% transparent water projects that create lasting change. Quick to give, easy to trust—and every dollar drives real impact.</p>
+    <a href="https://www.charitywater.org/donate" target="_blank" class="donate-btn">Donate Now</a>
+  </section>
 
-    <!-- Call-to-Action Section: This encourages visitors to take action -->
-    <section class="call-to-action">
-        <h2>Make a Difference</h2>
-        <p>Your support can help save lives. Every donation brings us closer to a world with clean water for all.</p>
-        <a href="#" class="donate-button">Donate Now</a>
-    </section>
+  <!-- STORY SECTION -->
+  <section class="story">
+    <!-- Full signed CDN URL from the Dropmark file (includes query params) -->
+    <img class="story-img"
+         src="https://cdn2.dropmarkusercontent.com/52043/867f00c68a9d0d9b7cdd5b41721788428d01d0dd546259fd5df6dbbdbd5f35ca/cw_Selects_4x5_25.jpg?Expires=1761086420&amp;Signature=bugHu6HDsOoKH~9nhykEOuXeezilkGk0JLWmAmkW6UO868oy~ExW5uSWfUJEFDni5ikxFymGYcq6dyRmRtpoBNKz-KrP92-caws1WFF3fSU4u5JJ31T2SE9BkdZLeUm2VGvesYjl~hjsZIRImuen2Yqhtt4BSrvkahO6N63ipejVMqS0giXTMgZyKQa~fy23pjA1fxWC4NKY9dnRpKR40Pa-DmX49fvjBa43fRo9BZMRo1SLRgi0UbDlLYCcxTuK2t94ZYStQtaXBuFqBIbZncQN4xM~l4vLHo4EkwIBzOjNvlkfrnkLVGHZZyEkCJbHZMewKfc8hnYDpAzerTOTeQ__&amp;Key-Pair-Id=APKAITQYWVEN757ZA4KQ"
+         alt="Community with clean water"
+         loading="lazy"
+         width="864" height="1080">
+
+    <div class="story-text">
+      <h2>Changing Lives, One Well at a Time</h2>
+      <p>In villages across Africa and Asia, clean water transforms lives. Children can attend school, families can grow food, and communities thrive. Your support makes this possible.</p>
+      <p>Together, we’ve funded thousands of clean water projects that bring health and hope to millions. And we’re just getting started.</p>
+      <p class="caption"><a href="https://dpmk.in/i/yT3vNr3YdF" target="_blank" rel="noopener">Photo: charity: water (Dropmark)</a></p>
+    </div>
+  </section>
+
+<!-- CALL TO ACTION SECTION -->
+
+  <section class="cta">
+    <h2>Ready to Make a Difference?</h2>
+    <p>Your donation brings clean water to those in need. 100% funds water projects.</p>
+    <a href="https://www.charitywater.org/donate" target="_blank" class="donate-btn">Donate Now</a>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Charity Water. All Rights Reserved.</p>
+    <!-- Logo image for Charity Water, positioned in the top left corner -->
+    <img id="footer-logo" src="cw_logo.png" alt="Charity Water Logo" class="logo-img">
+  </footer>
+
+  <!-- Add a small script to try common image locations if the browser can't find the logo -->
+  <script>
+    (function(){
+      // list of common places beginners put images
+      var paths = [
+        'cw_logo.png',
+        'img/cw_logo.png',
+        'images/cw_logo.png',
+        'assets/cw_logo.png'
+      ];
+
+      // try to find a working path for an <img> with given id
+      function findAndSet(id){
+        var el = document.getElementById(id);
+        if(!el) return;
+
+        // quick test of current src first
+        var current = new Image();
+        current.onload = function(){ /* current src OK */ };
+        current.onerror = function(){
+          tryNext(0);
+        };
+        current.src = el.src + '?_=' + Date.now();
+
+        function tryNext(i){
+          if(i >= paths.length){
+            console.warn('Logo not found. Checked paths:', paths);
+            return;
+          }
+          var img = new Image();
+          img.onload = function(){
+            el.src = paths[i];
+          };
+          img.onerror = function(){ tryNext(i+1); };
+          img.src = paths[i] + '?_=' + Date.now(); // cache-buster
+        }
+      }
+
+      findAndSet('front-logo');
+      findAndSet('footer-logo');
+    })();
+  </script>
+
 </body>
 </html>
